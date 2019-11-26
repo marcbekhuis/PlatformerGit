@@ -6,21 +6,23 @@ public class PlayerMovement : MonoBehaviour
 {
     public enum PlayerState
     {
-        Running,
         Standing,
         Walking,
         Jumping,
         Falling
     }
 
+    [Header("Movement")]
     [SerializeField] private float jumpForce = 3f;
+    [SerializeField] private float walkingSpeed = 0.5f;
+
+    [Header("Other")]
     [SerializeField] private LayerMask layerMask;
-    public PlayerState playerState = PlayerState.Standing;
+    [SerializeField] private PlayerState playerState = PlayerState.Standing;
+    public float groundCheckHeight = -0.505f;
+
 
     private Rigidbody2D rigidbody2D;
-
-    [SerializeField] private float runningSpeed = 1f;
-    [SerializeField] private float walkingSpeed = 0.5f;
 
     private void Start()
     {
@@ -30,20 +32,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Jump();
             }
             Move(walkingSpeed * Input.GetAxis("Horizontal"));
-            if (Physics2D.OverlapBox((Vector2)transform.position + new Vector2(0, -0.505f), new Vector2(0.2f, 0.02f), 0, layerMask) && playerState != PlayerState.Jumping)
+            if (Physics2D.OverlapBox((Vector2)transform.position + new Vector2(0, groundCheckHeight), new Vector2(0.2f, 0.02f), 0, layerMask) && playerState != PlayerState.Jumping)
             {
                 if (rigidbody2D.velocity.x <= walkingSpeed && rigidbody2D.velocity.x > 0.1f)
                 {
                     playerState = PlayerState.Walking;
-                }
-                else if (rigidbody2D.velocity.x <= runningSpeed && rigidbody2D.velocity.x > 0.1f)
-                {
-                    playerState = PlayerState.Running;
                 }
                 else
                 {
@@ -73,6 +71,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawCube((Vector2)transform.position + new Vector2(0, -0.505f), new Vector2(0.2f, 0.02f));
+        Gizmos.DrawCube((Vector2)transform.position + new Vector2(0, groundCheckHeight), new Vector2(0.2f, 0.02f));
     }
 }
