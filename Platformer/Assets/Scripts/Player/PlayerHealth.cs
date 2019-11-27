@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         playerCollider = this.GetComponent<BoxCollider2D>();
-        SpriteChild = this.transform.FindChild("Sprite").gameObject;
+        SpriteChild = this.transform.Find("Sprite").gameObject;
         playerMovement = this.GetComponent<PlayerMovement>();
     }
 
