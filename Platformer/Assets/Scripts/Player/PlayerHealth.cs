@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+
 public class PlayerHealth : MonoBehaviour
 {
+    public static bool PlayerAlive = true;
 
     [SerializeField] private int health = 3;
     [SerializeField] private UnityEvent OnPlayerDie = new UnityEvent();
@@ -28,6 +31,8 @@ public class PlayerHealth : MonoBehaviour
         if (health - lost <= 0)
         {
             health = 0;
+            PlayerAlive = false;
+            StartCoroutine(SizeDown(0));
             OnPlayerDie.Invoke();
         }
         else
@@ -43,11 +48,11 @@ public class PlayerHealth : MonoBehaviour
         for (float i = 0; i < animationTimeSec; i += Time.deltaTime)
         {
             SpriteChild.transform.localScale -= new Vector3(SizeDownPerSec, SizeDownPerSec, 0) * Time.deltaTime;
-            playerCollider.size -= new Vector2(SizeDownPerSec, SizeDownPerSec) / 2 * Time.deltaTime;
+            playerCollider.size -= new Vector2(SizeDownPerSec, SizeDownPerSec) * Time.deltaTime;
             yield return null;
         }
         SpriteChild.transform.localScale = new Vector3(newSize, newSize, 1);
-        playerCollider.size = new Vector2(newSize, newSize) / 2;
-        playerMovement.groundCheckHeight += 0.125f;
+        playerCollider.size = new Vector2(newSize, newSize);
+        playerMovement.groundCheckHeight += 0.25f;
     }
 }

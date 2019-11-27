@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (PlayerHealth.PlayerAlive)
+        {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Jump();
@@ -52,6 +54,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerState = PlayerState.Falling;
             }
+        }
+        else
+        {
+            rigidbody2D.bodyType = RigidbodyType2D.Static;
+        }
     }
 
     private void Move(float speed)

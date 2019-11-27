@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (this.transform.position.x < playerLoc.position.x)
         {
