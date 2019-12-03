@@ -12,10 +12,20 @@ public class PlayerMovement : MonoBehaviour
         Falling
     }
 
+    public enum MovementMode
+    {
+        SideView,
+        TopDownView
+    }
+
     [Header("Movement")]
-    [SerializeField] private float jumpForce = 3f;
-    [SerializeField] private float walkingSpeed = 0.5f;
-    [SerializeField] private PlayerState playerState = PlayerState.Standing;
+    public float jumpForce = 3f;
+    public float walkingSpeed = 0.5f;
+    public PlayerState playerState = PlayerState.Standing;
+
+    [Header("Movement Mode")]
+    [SerializeField] private MovementMode movementMode;
+    private PlayerSideViewMovement playerSideViewMovement;
 
     [Header("GroundCheck")]
     [SerializeField] private LayerMask layerMask;
@@ -26,13 +36,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = this.GetComponent<Rigidbody>();
+        playerSideViewMovement = this.GetComponent<PlayerSideViewMovement>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Movement();
+        switch (movementMode)
+        {
+            case MovementMode.SideView:
+                if (playerSideViewMovement)
+                {
+                    playerSideViewMovement.Movement();
+                }
+                break;
+            case MovementMode.TopDownView:
+                break;
+            default:
+                break;
+        }
     }
 
     private void FixedUpdate()
