@@ -18,6 +18,7 @@ public class PlayerSideViewMovement : MonoBehaviour
     {
         if (PlayerHealth.PlayerAlive)
         {
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
             switch (playerMovement.playerState)
             {
                 case PlayerMovement.PlayerState.Standing:

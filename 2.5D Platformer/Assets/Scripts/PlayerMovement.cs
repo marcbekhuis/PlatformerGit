@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Mode")]
     [SerializeField] private MovementMode movementMode;
     private PlayerSideViewMovement playerSideViewMovement;
+    private PlayerTopDownMovement playerTopDownMovement;
 
     [Header("GroundCheck")]
     [SerializeField] private LayerMask layerMask;
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody = this.GetComponent<Rigidbody>();
         playerSideViewMovement = this.GetComponent<PlayerSideViewMovement>();
+        playerTopDownMovement = this.GetComponent<PlayerTopDownMovement>();
     }
 
     // Update is called once per frame
@@ -52,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
             case MovementMode.TopDownView:
+                if (playerTopDownMovement)
+                {
+                    playerTopDownMovement.Movement();
+                }
                 break;
             default:
                 break;
@@ -61,18 +67,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         State();
-    }
-
-    private void Move(float speed)
-    {
-        rigidbody.velocity = new Vector3(speed, rigidbody.velocity.y,0);
-    }
-
-    public void Jump()
-    {
-        playerState = PlayerState.Jumping;
-        rigidbody.AddForce(new Vector2(0, jumpForce), ForceMode.Impulse);
-        
     }
 
     private void OnDrawGizmosSelected()
@@ -101,35 +95,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerState = PlayerState.Jumping;
-        }
-    }
-
-    private void Movement()
-    {
-        if (PlayerHealth.PlayerAlive)
-        {
-            switch (playerState)
-            {
-                case PlayerState.Standing:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerState.Walking:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerState.Jumping:
-                    break;
-                case PlayerState.Falling:
-                    break;
-                default:
-                    break;
-            }
-            Move(walkingSpeed * Input.GetAxis("Horizontal"));
         }
     }
 

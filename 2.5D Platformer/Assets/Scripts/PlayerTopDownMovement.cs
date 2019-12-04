@@ -18,16 +18,17 @@ public class PlayerTopDownMovement : MonoBehaviour
     {
         if (PlayerHealth.PlayerAlive)
         {
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             switch (playerMovement.playerState)
             {
                 case PlayerMovement.PlayerState.Standing:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
                         Jump();
                     }
                     break;
                 case PlayerMovement.PlayerState.Walking:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                    if (Input.GetKeyDown(KeyCode.Space))
                     {
                         Jump();
                     }
@@ -39,13 +40,15 @@ public class PlayerTopDownMovement : MonoBehaviour
                 default:
                     break;
             }
-            Move(playerMovement.walkingSpeed * Input.GetAxis("Horizontal"));
+            Move(playerMovement.walkingSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }
     }
 
-    private void Move(float speed)
+    private void Move(float speed, float inputX, float inputZ)
     {
-        rigidbody.velocity = new Vector3(speed, rigidbody.velocity.y, 0);
+        Vector2 speed2 = new Vector2(speed * inputX, speed * inputZ);
+        //speed2.Normalize();
+        rigidbody.velocity = new Vector3(speed2.x, rigidbody.velocity.y, speed2.y);
     }
 
     public void Jump()
