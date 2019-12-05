@@ -659,69 +659,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
         type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
       propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2110602628}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: -8988597546324625005, guid: c4dc05335fc37a24c846123c1f0522db,
-        type: 3}
-      propertyPath: OnPortalEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level1
-      objectReference: {fileID: 0}
     - target: {fileID: 2539017302607818188, guid: c4dc05335fc37a24c846123c1f0522db,
         type: 3}
       propertyPath: m_Name

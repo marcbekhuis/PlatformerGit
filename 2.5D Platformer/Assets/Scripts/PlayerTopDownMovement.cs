@@ -14,7 +14,7 @@ public class PlayerTopDownMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Movement()
+    public void Movement(float inputX, float inputZ)
     {
         if (PlayerHealth.PlayerAlive)
         {
@@ -46,8 +46,10 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private void Move(float speed, float inputX, float inputZ)
     {
-        Vector2 speed2 = new Vector2(speed * inputX, speed * inputZ);
-        //speed2.Normalize();
+        Vector2 speed2 = new Vector2(inputX, inputZ);
+        speed2.Normalize();
+        speed2 *= speed;
+
         rigidbody.velocity = new Vector3(speed2.x, rigidbody.velocity.y, speed2.y);
     }
 

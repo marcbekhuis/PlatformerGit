@@ -14,7 +14,7 @@ public class PlayerSideViewMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Movement()
+    public void Movement(float input)
     {
         if (PlayerHealth.PlayerAlive)
         {
@@ -40,7 +40,7 @@ public class PlayerSideViewMovement : MonoBehaviour
                 default:
                     break;
             }
-            Move(playerMovement.walkingSpeed * Input.GetAxis("Horizontal"));
+            Move(playerMovement.walkingSpeed * input);
         }
     }
 
@@ -51,8 +51,11 @@ public class PlayerSideViewMovement : MonoBehaviour
 
     public void Jump()
     {
-        playerMovement.playerState = PlayerMovement.PlayerState.Jumping;
-        rigidbody.AddForce(new Vector2(0, playerMovement.jumpForce), ForceMode.Impulse);
+        if (!PlayerExitPortal.playerExitingPortal)
+        {
+            playerMovement.playerState = PlayerMovement.PlayerState.Jumping;
+            rigidbody.AddForce(new Vector2(0, playerMovement.jumpForce), ForceMode.Impulse);
+        }
 
     }
 }

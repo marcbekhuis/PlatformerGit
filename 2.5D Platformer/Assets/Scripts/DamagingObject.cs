@@ -9,11 +9,11 @@ public class DamagingObject : MonoBehaviour
 
     private float delay = 0;
 
-    private void OnTriggerStay(Collider collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (delay < Time.time && collision.gameObject.CompareTag("Player"))
+        if (delay < Time.time && other.CompareTag("Player"))
         {
-            collision.gameObject.GetComponentInParent<PlayerHealth>().RemoveHealth(damage);
+            other.gameObject.GetComponentInParent<PlayerHealth>().RemoveHealth(damage);
             delay = Time.time + cooldownSec;
         }
     }

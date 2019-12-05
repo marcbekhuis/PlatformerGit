@@ -45,22 +45,25 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        switch (movementMode)
+        if (!PlayerExitPortal.playerExitingPortal)
         {
-            case MovementMode.SideView:
-                if (playerSideViewMovement)
-                {
-                    playerSideViewMovement.Movement();
-                }
-                break;
-            case MovementMode.TopDownView:
-                if (playerTopDownMovement)
-                {
-                    playerTopDownMovement.Movement();
-                }
-                break;
-            default:
-                break;
+            switch (movementMode)
+            {
+                case MovementMode.SideView:
+                    if (playerSideViewMovement)
+                    {
+                        playerSideViewMovement.Movement(Input.GetAxis("Horizontal"));
+                    }
+                    break;
+                case MovementMode.TopDownView:
+                    if (playerTopDownMovement)
+                    {
+                        playerTopDownMovement.Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
