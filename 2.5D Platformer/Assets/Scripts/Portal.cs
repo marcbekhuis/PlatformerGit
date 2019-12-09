@@ -9,9 +9,12 @@ public class Portal : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (Time.timeSinceLevelLoad > 1)
         {
-            OnPortalEnter.Invoke();
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                OnPortalEnter.Invoke();
+            }
         }
     }
 }

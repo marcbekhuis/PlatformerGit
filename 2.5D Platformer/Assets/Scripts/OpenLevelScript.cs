@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OpenLevelScript : MonoBehaviour
 {
-    public void OpenLevel(string level)
+    public void OpenLevel(string level = "MainMenu")
     {
         SceneManager.LoadScene(level);
     }
