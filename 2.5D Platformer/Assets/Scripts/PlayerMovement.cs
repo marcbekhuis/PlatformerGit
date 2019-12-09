@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 3f;
     public float walkingSpeed = 0.5f;
     public PlayerState playerState = PlayerState.Standing;
+    public static bool CanMove = true;
 
     [Header("Movement Mode")]
     [SerializeField] private MovementMode movementMode;
@@ -40,12 +41,13 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = this.GetComponent<Rigidbody>();
         playerSideViewMovement = this.GetComponent<PlayerSideViewMovement>();
         playerTopDownMovement = this.GetComponent<PlayerTopDownMovement>();
+        CanMove = true;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (!PlayerExitPortal.playerExitingPortal)
+        if (CanMove)
         {
             switch (movementMode)
             {

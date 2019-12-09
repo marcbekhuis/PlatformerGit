@@ -7,8 +7,6 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static bool PlayerAlive = true;
-
     [SerializeField] private int health = 3;
     [SerializeField] private UnityEvent OnPlayerDie = new UnityEvent();
 
@@ -32,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         if (health - lost <= 0)
         {
             health = 0;
-            PlayerAlive = false;
+            PlayerMovement.CanMove = false;
             OnPlayerDie.Invoke();
         }
         else

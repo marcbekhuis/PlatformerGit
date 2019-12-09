@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerExitPortal : MonoBehaviour
 {
-    public static bool playerExitingPortal = false;
 
     [SerializeField] float walkDuration = 3;
 
@@ -20,12 +19,12 @@ public class PlayerExitPortal : MonoBehaviour
     IEnumerator Move()
     {
         yield return null;
-        playerExitingPortal = true;
+        PlayerMovement.CanMove = false;
         for (float i = 0; i < walkDuration; i+= Time.deltaTime)
         {
             playerSideViewMovement.Movement(1);
             yield return null;
         }
-        playerExitingPortal = false;
+        PlayerMovement.CanMove = true;
     }
 }

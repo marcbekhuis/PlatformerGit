@@ -16,32 +16,29 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     public void Movement(float inputX, float inputZ)
     {
-        if (PlayerHealth.PlayerAlive)
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        switch (playerMovement.playerState)
         {
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-            switch (playerMovement.playerState)
-            {
-                case PlayerMovement.PlayerState.Standing:
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerMovement.PlayerState.Walking:
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerMovement.PlayerState.Jumping:
-                    break;
-                case PlayerMovement.PlayerState.Falling:
-                    break;
-                default:
-                    break;
-            }
-            Move(playerMovement.walkingSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            case PlayerMovement.PlayerState.Standing:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
+                break;
+            case PlayerMovement.PlayerState.Walking:
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
+                break;
+            case PlayerMovement.PlayerState.Jumping:
+                break;
+            case PlayerMovement.PlayerState.Falling:
+                break;
+            default:
+                break;
         }
+        Move(playerMovement.walkingSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
     private void Move(float speed, float inputX, float inputZ)

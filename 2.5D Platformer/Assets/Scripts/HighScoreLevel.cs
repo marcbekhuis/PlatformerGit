@@ -5,58 +5,73 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HighScore Level *", menuName = "ScriptableObjects/HighScore Level")]
 public class HighScoreLevel : ScriptableObject
 {
-    private Dictionary<string, Score> scores = new Dictionary<string, Score>();
+    [SerializeField] private List<Score> scores = new List<Score>();
 
-    public struct Score
+    [System.Serializable]
+    public class Score
     {
-        public Score(float TimeLeft)
+        public Score(string Name, float TimeLeft)
         {
+            name = Name;
             timeLeft = TimeLeft;
         }
 
+        public string name;
         public float timeLeft;
     }
 
-    public void AddScore(string playerName = "Empty", float timeLeft = 0)
+    public void AddScore(string playerName = "None", float timeLeft = 0)
     {
-        if (!scores.ContainsKey(playerName))
+        int index;
+        if (!FindName(playerName, out index))
         {
-            scores.Add(playerName, new Score(timeLeft));
+            scores.Add(new Score(playerName, timeLeft));
         }
-        else if(scores[playerName].timeLeft < timeLeft)
+        else if(scores[index].timeLeft < timeLeft)
         {
-            scores.Remove(playerName);
-            scores.Add(playerName, new Score(timeLeft));
+            scores[index].timeLeft = timeLeft;
         }
     }
 
-    public Dictionary<string, Score> GetHighScore(int numberOfScores)
+    public List<Score> GetHighScore(int numberOfScores)
     {
-        Dictionary<string, Score> tempScores = new Dictionary<string, Score>(scores);
-        Dictionary<string, Score> highScoreNames = new Dictionary<string, Score>();
+        List<Score> tempScores = new List<Score>(scores);
+        List<Score> highestScores = new List<Score>();
 
         for (int i = 0; i < numberOfScores; i++)
         {
             if (tempScores.Count > 0)
             {
-                float highestTime = 0;
-                string highestName = "";
+                Score highestScore = new Score("None", 0);
                 foreach (var score in tempScores)
                 {
-                    if (score.Value.timeLeft > highestTime)
+                    if (score.timeLeft > highestScore.timeLeft)
                     {
-                        highestTime = score.Value.timeLeft;
-                        highestName = score.Key;
+                        highestScore = score;
                     }
                 }
-                tempScores.Remove(highestName);
-                highScoreNames.Add(highestName, scores[highestName]);
+                tempScores.Remove(highestScore);
+                highestScores.Add(highestScore);
             }
             else
             {
                 break;
             }
         }
-        return highScoreNames;
+        return highestScores;
+    }
+
+    private bool FindName(string name, out int index)
+    {
+        for (int i = 0; i < scores.Count; i++) 
+        {
+            if (scores[i].name == name)
+            {
+                index = i;
+                return true;
+            }
+        }
+        index = 0;
+        return false;
     }
 }

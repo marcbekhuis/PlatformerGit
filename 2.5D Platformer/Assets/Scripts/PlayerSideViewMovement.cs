@@ -16,32 +16,29 @@ public class PlayerSideViewMovement : MonoBehaviour
 
     public void Movement(float input)
     {
-        if (PlayerHealth.PlayerAlive)
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        switch (playerMovement.playerState)
         {
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-            switch (playerMovement.playerState)
-            {
-                case PlayerMovement.PlayerState.Standing:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerMovement.PlayerState.Walking:
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-                    {
-                        Jump();
-                    }
-                    break;
-                case PlayerMovement.PlayerState.Jumping:
-                    break;
-                case PlayerMovement.PlayerState.Falling:
-                    break;
-                default:
-                    break;
-            }
-            Move(playerMovement.walkingSpeed * input);
+            case PlayerMovement.PlayerState.Standing:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Jump();
+                }
+                break;
+            case PlayerMovement.PlayerState.Walking:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Jump();
+                }
+                break;
+            case PlayerMovement.PlayerState.Jumping:
+                break;
+            case PlayerMovement.PlayerState.Falling:
+                break;
+            default:
+                break;
         }
+        Move(playerMovement.walkingSpeed * input);
     }
 
     private void Move(float speed)
@@ -51,7 +48,7 @@ public class PlayerSideViewMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (!PlayerExitPortal.playerExitingPortal)
+        if (PlayerMovement.CanMove)
         {
             playerMovement.playerState = PlayerMovement.PlayerState.Jumping;
             rigidbody.AddForce(new Vector2(0, playerMovement.jumpForce), ForceMode.Impulse);

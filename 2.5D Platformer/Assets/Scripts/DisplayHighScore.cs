@@ -13,7 +13,7 @@ public class DisplayHighScore : MonoBehaviour
         scoreText.text = "";
         foreach (var score in highScoreLevel.GetHighScore(3))
         {
-            scoreText.text += score.Key + " - Time Left: " + score.Value.timeLeft + "\n";
+            scoreText.text += score.name + " - Time Left: " + score.timeLeft + "\n";
         }
     }
 }
