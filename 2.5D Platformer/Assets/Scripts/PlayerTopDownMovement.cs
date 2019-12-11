@@ -32,7 +32,7 @@ public class PlayerTopDownMovement : MonoBehaviour
                 }
                 break;
             case PlayerMovement.PlayerState.Running:
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Jump();
                 }
@@ -44,7 +44,7 @@ public class PlayerTopDownMovement : MonoBehaviour
             default:
                 break;
         }
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && playerMovement.stamina > 0)
         {
             Move(playerMovement.runningSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         }

@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 3f;
     public float walkingSpeed = 4f;
     public float runningSpeed = 8f;
+    public float stamina = 20;
+    public float staminaRegenSec = 1;
+    public float staminaUsedSec = 1;
     public PlayerState playerState = PlayerState.Standing;
     public static bool CanMove = true;
 
@@ -37,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 boxSize = new Vector3(0.6f, 0.02f, 0.6f);
 
     private Rigidbody rigidbody;
+    private float maxStamina;
 
     private void Start()
     {
@@ -44,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         playerSideViewMovement = this.GetComponent<PlayerSideViewMovement>();
         playerTopDownMovement = this.GetComponent<PlayerTopDownMovement>();
         CanMove = true;
+        maxStamina = stamina;
     }
 
     // Update is called once per frame
@@ -68,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
                 default:
                     break;
             }
+            Stamina();
         }
     }
 
@@ -86,11 +92,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GroundCheck())
         {
-            if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= walkingSpeed || rigidbody.velocity.x >= walkingSpeed * -1))
+            if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= walkingSpeed && rigidbody.velocity.x >= walkingSpeed * -1))
             {
                 playerState = PlayerState.Walking;
             }
-            else if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= runningSpeed || rigidbody.velocity.x >= runningSpeed * -1))
+            else if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= runningSpeed && rigidbody.velocity.x >= runningSpeed * -1))
             {
                 playerState = PlayerState.Running;
             }
@@ -106,6 +112,28 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerState = PlayerState.Jumping;
+        }
+    }
+
+    private void Stamina()
+    {
+        switch (playerState)
+        {
+            case PlayerState.Standing:
+                stamina = Mathf.Clamp(stamina + Time.deltaTime * staminaRegenSec, 0, maxStamina);
+                break;
+            case PlayerState.Walking:
+                stamina = Mathf.Clamp(stamina + Time.deltaTime * staminaRegenSec / 2, 0, maxStamina);
+                break;
+            case PlayerState.Running:
+                stamina = Mathf.Clamp(stamina - Time.deltaTime * staminaUsedSec, 0, maxStamina);
+                break;
+            case PlayerState.Jumping:
+                break;
+            case PlayerState.Falling:
+                break;
+            default:
+                break;
         }
     }
 

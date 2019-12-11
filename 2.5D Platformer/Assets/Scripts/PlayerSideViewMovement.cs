@@ -44,7 +44,7 @@ public class PlayerSideViewMovement : MonoBehaviour
             default:
                 break;
         }
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && playerMovement.stamina > 0)
         {
             Move(playerMovement.runningSpeed * input);
         }
