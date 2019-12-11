@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Standing,
         Walking,
+        Running,
         Jumping,
         Falling
     }
@@ -20,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float jumpForce = 3f;
-    public float walkingSpeed = 0.5f;
+    public float walkingSpeed = 4f;
+    public float runningSpeed = 8f;
     public PlayerState playerState = PlayerState.Standing;
     public static bool CanMove = true;
 
@@ -84,9 +86,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GroundCheck())
         {
-            if (rigidbody.velocity.x != 0f)
+            if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= walkingSpeed || rigidbody.velocity.x >= walkingSpeed * -1))
             {
                 playerState = PlayerState.Walking;
+            }
+            else if (rigidbody.velocity.x != 0f && (rigidbody.velocity.x <= runningSpeed || rigidbody.velocity.x >= runningSpeed * -1))
+            {
+                playerState = PlayerState.Running;
             }
             else
             {

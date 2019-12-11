@@ -31,6 +31,12 @@ public class PlayerSideViewMovement : MonoBehaviour
                     Jump();
                 }
                 break;
+            case PlayerMovement.PlayerState.Running:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Jump();
+                }
+                break;
             case PlayerMovement.PlayerState.Jumping:
                 break;
             case PlayerMovement.PlayerState.Falling:
@@ -38,7 +44,14 @@ public class PlayerSideViewMovement : MonoBehaviour
             default:
                 break;
         }
-        Move(playerMovement.walkingSpeed * input);
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            Move(playerMovement.runningSpeed * input);
+        }
+        else
+        {
+            Move(playerMovement.walkingSpeed * input);
+        }
     }
 
     private void Move(float speed)

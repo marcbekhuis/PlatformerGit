@@ -31,6 +31,12 @@ public class PlayerTopDownMovement : MonoBehaviour
                     Jump();
                 }
                 break;
+            case PlayerMovement.PlayerState.Running:
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    Jump();
+                }
+                break;
             case PlayerMovement.PlayerState.Jumping:
                 break;
             case PlayerMovement.PlayerState.Falling:
@@ -38,7 +44,14 @@ public class PlayerTopDownMovement : MonoBehaviour
             default:
                 break;
         }
-        Move(playerMovement.walkingSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            Move(playerMovement.runningSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        }
+        else
+        {
+            Move(playerMovement.walkingSpeed, Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        }
     }
 
     private void Move(float speed, float inputX, float inputZ)
