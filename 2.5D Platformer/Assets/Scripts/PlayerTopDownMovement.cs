@@ -16,7 +16,7 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     public void Movement(float inputX, float inputZ)
     {
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         switch (playerMovement.playerState)
         {
             case PlayerMovement.PlayerState.Standing:
@@ -60,7 +60,7 @@ public class PlayerTopDownMovement : MonoBehaviour
         speed2.Normalize();
         speed2 *= speed;
 
-        rigidbody.velocity = new Vector3(speed2.x, rigidbody.velocity.y, speed2.y);
+        rigidbody.velocity = rigidbody.rotation * new Vector3(speed2.x, rigidbody.velocity.y, speed2.y);
     }
 
     public void Jump()

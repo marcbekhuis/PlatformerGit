@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public enum MovementMode
     {
         SideView,
-        TopDownView
+        TopDownView,
+        ThirdPerson
     }
 
     [Header("Movement")]
@@ -28,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     public float staminaUsedSec = 1;
     public PlayerState playerState = PlayerState.Standing;
     public static bool CanMove = true;
+    public float mouseSensitivity = 7;
 
     [Header("Movement Mode")]
     [SerializeField] private MovementMode movementMode;
     private PlayerSideViewMovement playerSideViewMovement;
     private PlayerTopDownMovement playerTopDownMovement;
+    private PlayerThirdPersonMovement playerThirdPersonMovement;
 
     [Header("GroundCheck")]
     [SerializeField] private LayerMask layerMask;
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = this.GetComponent<Rigidbody>();
         playerSideViewMovement = this.GetComponent<PlayerSideViewMovement>();
         playerTopDownMovement = this.GetComponent<PlayerTopDownMovement>();
+        playerThirdPersonMovement = this.GetComponent<PlayerThirdPersonMovement>();
         CanMove = true;
         maxStamina = stamina;
     }
@@ -68,6 +72,12 @@ public class PlayerMovement : MonoBehaviour
                     if (playerTopDownMovement)
                     {
                         playerTopDownMovement.Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+                    }
+                    break;
+                case MovementMode.ThirdPerson:
+                    if (playerThirdPersonMovement)
+                    {
+                        playerThirdPersonMovement.Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
                     }
                     break;
                 default:
