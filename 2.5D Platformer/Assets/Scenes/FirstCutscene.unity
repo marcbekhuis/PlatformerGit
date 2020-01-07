@@ -781,7 +781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &192745561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4270,6 +4270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1542639614}
   - component: {fileID: 1542639613}
+  - component: {fileID: 1542639615}
   m_Layer: 0
   m_Name: DollyTrack2
   m_TagString: Untagged
@@ -4330,6 +4331,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1542639615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542639612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd9cf611f0450be4885525326210528b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: {fileID: 1542639613}
+  dollyCart: {fileID: 1562035956}
+  portal: {fileID: 0}
+  distanceToSpawnPortal: 8
 --- !u!1 &1562035954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4346,7 +4363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1562035956
 MonoBehaviour:
   m_ObjectHideFlags: 0
