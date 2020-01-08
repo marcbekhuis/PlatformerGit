@@ -55,4 +55,10 @@ public class PlayerHealth : MonoBehaviour
             placedHealthIcons.RemoveAt(placedHealthIcons.Count - 1);
         }
     }
+
+    public void AddHealth(int amountToAdd)
+    {
+        health += amountToAdd;
+        AddHealthIcon(amountToAdd);
+    }
 }

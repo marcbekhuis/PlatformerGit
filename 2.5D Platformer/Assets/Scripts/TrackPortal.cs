@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class TrackPortal : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TrackPortal : MonoBehaviour
     [SerializeField] private GameObject portal;
     [Space]
     [SerializeField] private float distanceToSpawnPortal;
+    [SerializeField] private string scene;
 
     private bool triggered = false;
 
@@ -26,9 +28,14 @@ public class TrackPortal : MonoBehaviour
         {
             if (dollyCart.m_Position >= distanceToSpawnPortal)
             {
-                GameObject spawnedPortal = Instantiate(portal, path.m_Waypoints[path.m_Waypoints.Length - 1].position, new Quaternion(0,0,0,0));
-                spawnedPortal.transform.rotation = path.m_Waypoints[path.m_Waypoints.Length - 1].
+                GameObject spawnedPortal = Instantiate(portal, path.EvaluatePosition(17), new Quaternion(0,0,0,0));
+                spawnedPortal.transform.rotation = path.EvaluateOrientation(17);
+                triggered = true;
             }
+        }
+        else if(dollyCart.m_Position >= 17)
+        {
+            SceneManager.LoadScene(scene);
         }
     }
 }
