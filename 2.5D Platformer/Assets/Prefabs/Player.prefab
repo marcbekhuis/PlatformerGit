@@ -66,13 +66,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 7
   walkingSpeed: 4
+  runningSpeed: 8
+  stamina: 20
+  staminaRegenSec: 1
+  staminaUsedSec: 1
   playerState: 0
+  mouseSensitivity: 7
   movementMode: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 256
   groundCheckHeight: -0.5002
-  boxSize: {x: 0.6, y: 0.005, z: 0.6}
+  boxSize: {x: 0.5, y: 0.005, z: 0.5}
 --- !u!114 &334998036703257343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +118,8 @@ MonoBehaviour:
   OnPlayerDie:
     m_PersistentCalls:
       m_Calls: []
+  healthIcon: {fileID: 0}
+  healthIconHolder: {fileID: 0}
 --- !u!1 &334998037109180760
 GameObject:
   m_ObjectHideFlags: 0

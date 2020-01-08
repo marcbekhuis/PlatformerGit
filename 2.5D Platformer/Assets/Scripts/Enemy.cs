@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+[CreateAssetMenu(fileName = "Enemy *", menuName = "ScriptableObjects/Enemy")]
+public class Enemy : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Mesh mesh;
+    [SerializeField] private Material material;
+    [Space]
+    [Header("Health System")]
+    [SerializeField] private int health = 1;
+    [SerializeField] private int damage = 1;
+    [Space]
+    [Header("Movement")]
+    [SerializeField] private float speed = 5;
 
-    // Update is called once per frame
-    void Update()
+    public void Setup(EnemyMovement enemyMovement, MeshFilter meshFilter, MeshRenderer meshRenderer)
     {
-        
+        enemyMovement.speed = speed;
+
+        meshFilter.mesh = mesh;
+        meshRenderer.material = material;
     }
 }

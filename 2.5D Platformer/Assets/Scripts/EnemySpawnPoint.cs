@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class EnemySpawnPoint : MonoBehaviour
 {
+    [SerializeField] private Enemy enemy;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        SpawnEnemy();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnEnemy()
     {
-        
+        GameObject spawnedEnemy = new GameObject();
+        spawnedEnemy.transform.position = this.transform.position;
+
+        spawnedEnemy.AddComponent<BoxCollider>();
+        spawnedEnemy.AddComponent<Rigidbody>();
+
+        EnemyMovement enemyMovement = spawnedEnemy.AddComponent<EnemyMovement>();
+
+        MeshRenderer meshRenderer = spawnedEnemy.AddComponent<MeshRenderer>();
+        MeshFilter meshFilter = spawnedEnemy.AddComponent<MeshFilter>();
+
+        enemy.Setup(enemyMovement, meshFilter, meshRenderer);
     }
 }
