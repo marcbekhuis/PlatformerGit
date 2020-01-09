@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2973d9f0f5dea54b96bc2d95019cd40, type: 3}
+  m_Name: Enemy Medium
+  m_EditorClassIdentifier: 
+  name: Enemy Medium
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: fc5c5b7eb0c6d814e8489a03c3a80a9b, type: 2}
+  size: {x: 1.2, y: 1.2, z: 1.2}
+  health: 2
+  damage: 2
+  player:
+    serializedVersion: 2
+    m_Bits: 512
+  damageCheckSize: {x: 1, y: 0.1, z: 1}
+  damageCheckOffset: {x: 0, y: 0.65, z: 0}
+  speed: 5
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheckSize: {x: 0.1, y: 0.1, z: 1.1}
+  groundCheckOffsetLeft: {x: -0.65, y: -0.63, z: 0}
+  groundCheckOffsetRight: {x: 0.65, y: -0.63, z: 0}
+  wallCheckSize: {x: 0.1, y: 1, z: 1.1}
+  wallCheckOffsetLeft: {x: -0.65, y: 0, z: 0}
+  wallCheckOffsetRight: {x: 0.65, y: 0, z: 0}

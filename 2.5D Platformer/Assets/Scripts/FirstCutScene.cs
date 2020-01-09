@@ -16,6 +16,9 @@ public class FirstCutScene : MonoBehaviour
     [SerializeField] private float delayBetweenWallsFall = 0.5f;
     [SerializeField] private float wallsEndHeight = 5;
     [SerializeField] private float timeTakesWallToFall = 0.1f;
+    [Space]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip wallHitGroundSound;
 
     private bool doorClose = false;
 
@@ -54,6 +57,7 @@ public class FirstCutScene : MonoBehaviour
             yield return null;
         }
         door.position = doorEndPos;
+        audioSource.PlayOneShot(wallHitGroundSound);
     }
 
     IEnumerator WallsFalling()
@@ -67,6 +71,7 @@ public class FirstCutScene : MonoBehaviour
             yield return null;
         }
         fallingWalls[0].position = new Vector3(fallingWalls[0].position.x, wallsEndHeight, fallingWalls[0].position.z);
+        audioSource.PlayOneShot(wallHitGroundSound);
 
         Vector3[] stepsPerSec = new Vector3[fallingWalls.Length - 1];
         for (int w = 0; w < fallingWalls.Length - 1; w++)

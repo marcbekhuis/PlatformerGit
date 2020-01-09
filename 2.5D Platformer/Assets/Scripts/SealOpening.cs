@@ -17,6 +17,8 @@ public class SealOpening : MonoBehaviour
 
     [SerializeField] private CinemachineDollyCart dollyCart;
     [SerializeField] private Rotation[] rotations;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip sealMovingSound;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +46,19 @@ public class SealOpening : MonoBehaviour
     IEnumerator Rotate(float lenghtSec, Vector3 rotation)
     {
         Vector3 rotationPerSec = (rotation - this.transform.localEulerAngles) / lenghtSec;
-        Debug.LogError(rotation + " - " + this.transform.localEulerAngles + " = " + (rotation - this.transform.localEulerAngles) + " / " + lenghtSec + " = " +  rotationPerSec);
+        if (audioSource && sealMovingSound)
+        {
+            audioSource.PlayOneShot(sealMovingSound);
+        }
         for (float i = 0; i < lenghtSec; i += Time.deltaTime)
         {
             this.transform.localEulerAngles += rotationPerSec * Time.deltaTime;
             yield return null;
         }
         this.transform.localEulerAngles = rotation;
+        if (audioSource && sealMovingSound)
+        {
+            audioSource.Stop();
+        }
     }
 }

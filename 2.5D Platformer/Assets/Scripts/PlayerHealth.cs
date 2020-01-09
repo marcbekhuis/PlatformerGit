@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int health = 3;
+    public int damage = 1;
     [SerializeField] private UnityEvent OnPlayerDie = new UnityEvent();
 
     [Header("Health Icons")]

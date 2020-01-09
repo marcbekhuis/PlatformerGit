@@ -21,10 +21,11 @@ public class EnemySpawnPoint : MonoBehaviour
         spawnedEnemy.AddComponent<Rigidbody>();
 
         EnemyMovement enemyMovement = spawnedEnemy.AddComponent<EnemyMovement>();
+        EnemyHealth enemyHealth = spawnedEnemy.AddComponent<EnemyHealth>();
 
         MeshRenderer meshRenderer = spawnedEnemy.AddComponent<MeshRenderer>();
         MeshFilter meshFilter = spawnedEnemy.AddComponent<MeshFilter>();
 
-        enemy.Setup(enemyMovement, meshFilter, meshRenderer);
+        enemy.Setup(enemyMovement, meshFilter, meshRenderer, spawnedEnemy, enemyHealth);
     }
 }

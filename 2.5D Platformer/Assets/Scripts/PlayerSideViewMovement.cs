@@ -7,6 +7,9 @@ public class PlayerSideViewMovement : MonoBehaviour
     private PlayerMovement playerMovement;
     private Rigidbody rigidbody;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +66,7 @@ public class PlayerSideViewMovement : MonoBehaviour
     {
         if (PlayerMovement.CanMove)
         {
+            audioSource.PlayOneShot(jumpSound);
             playerMovement.playerState = PlayerMovement.PlayerState.Jumping;
             rigidbody.AddForce(new Vector2(0, playerMovement.jumpForce), ForceMode.Impulse);
         }

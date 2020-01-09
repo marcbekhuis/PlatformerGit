@@ -30,17 +30,18 @@ public class PlayerMovement : MonoBehaviour
     public PlayerState playerState = PlayerState.Standing;
     public static bool CanMove = true;
     public float mouseSensitivity = 7;
-
+    [Space]
     [Header("Movement Mode")]
     [SerializeField] private MovementMode movementMode;
     private PlayerSideViewMovement playerSideViewMovement;
     private PlayerTopDownMovement playerTopDownMovement;
     private PlayerThirdPersonMovement playerThirdPersonMovement;
-
+    [Space]
     [Header("GroundCheck")]
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float groundCheckHeight = -0.505f;
     [SerializeField] private Vector3 boxSize = new Vector3(0.6f, 0.02f, 0.6f);
+    [Space]
 
     private Rigidbody rigidbody;
     private float maxStamina;
@@ -95,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawCube(transform.position + new Vector3(0, groundCheckHeight, 0), boxSize);
+        Gizmos.DrawCube(transform.position + new Vector3(0, groundCheckHeight, 0), boxSize * 2);
     }
 
     private void State()
