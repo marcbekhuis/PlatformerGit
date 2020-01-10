@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerState playerState = PlayerState.Standing;
     public static bool CanMove = true;
     public float mouseSensitivity = 7;
+    [SerializeField] private Image staminaBar;
     [Space]
     [Header("Movement Mode")]
     [SerializeField] private MovementMode movementMode;
@@ -146,10 +148,16 @@ public class PlayerMovement : MonoBehaviour
             default:
                 break;
         }
+        StaminaUI();
     }
 
     private bool GroundCheck()
     {
         return Physics.CheckBox(transform.position + new Vector3(0, groundCheckHeight, 0), boxSize, new Quaternion(0, 0, 0, 0), layerMask);
+    }
+
+    private void StaminaUI()
+    {
+        staminaBar.rectTransform.sizeDelta = new Vector2(1f / maxStamina * stamina * 100, staminaBar.rectTransform.sizeDelta.y);
     }
 }

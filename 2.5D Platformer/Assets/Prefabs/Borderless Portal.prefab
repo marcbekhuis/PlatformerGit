@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5330829188447423421}
   - component: {fileID: 7163118726136596007}
   - component: {fileID: 968688962441852874}
+  - component: {fileID: 3101285988926710618}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3101285988926710618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655749404839262863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c43a51c6dd6024488ab296cd4f1d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 150
 --- !u!1 &2539017302607818188
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,20 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0d65c4a145a56488d7a32705e575ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPortalEnter:
+  OnTrigger:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Level1
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  Cooldown: 0
 --- !u!1 &4775183558843169957
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +167,7 @@ GameObject:
   - component: {fileID: 3119516630286701400}
   - component: {fileID: 1110383515304840816}
   - component: {fileID: 7852896288062302725}
+  - component: {fileID: 3190381421809648982}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -231,3 +236,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3190381421809648982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775183558843169957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c43a51c6dd6024488ab296cd4f1d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: -150

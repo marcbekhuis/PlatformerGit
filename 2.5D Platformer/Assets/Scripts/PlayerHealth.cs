@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int health = 3;
     public int damage = 1;
     [SerializeField] private UnityEvent OnPlayerDie = new UnityEvent();
+    [SerializeField] private GameObject armor;
 
     [Header("Health Icons")]
     [SerializeField] private GameObject healthIcon;
@@ -17,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private List<GameObject> placedHealthIcons = new List<GameObject>();
+
+    private int armorUsesLeft = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void RemoveHealth(int lost)
     {
+        if (armorUsesLeft > 0)
+        {
+            armorUsesLeft--;
+            lost--;
+            if (armorUsesLeft <= 0)
+            {
+                armor.SetActive(false);
+            }
+        }
         RemoveHealthIcon(lost);
         if (health - lost <= 0)
         {
@@ -61,5 +71,15 @@ public class PlayerHealth : MonoBehaviour
     {
         health += amountToAdd;
         AddHealthIcon(amountToAdd);
+    }
+
+    public void EquipArmor(GameObject armorPickup)
+    {
+        if (armorUsesLeft <= 0)
+        {
+            armorUsesLeft = 3;
+            armor.SetActive(true);
+            Destroy(armorPickup);
+        }
     }
 }
